@@ -15,6 +15,11 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
+def get_price(symbol):
+    url = f"https://api.coinex.com/v1/market/future/ticker?symbol={symbol}"
+    response = requests.get(url)
+    data = response.json()
+    return data["last"]
 
 import requests
 import streamlit as st
@@ -24,7 +29,7 @@ def get_price(symbol):
     url = f"https://api.coinex.com/v1/market/future/ticker?symbol={symbol}"
     response = requests.get(url)
     data = response.json()
-    return data["data"]["last"]
+    return data["last"]
 
 # Use Streamlit to create a simple app to display the price
 st.title("CoinEx Token Future Price")
