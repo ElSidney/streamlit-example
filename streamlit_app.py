@@ -16,23 +16,18 @@ In the meantime, below is an example of what you can do with just a few lines of
 """
 
 
-with st.echo(code_location='below'):
-    total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
-    num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
+import requests
+import streamlit as st
 
-    Point = namedtuple('Point', 'x y')
-    data = []
+# Make a request to the CoinEx API to get the latest price of a token future
+def get_price(symbol):
+    url = f"https://api.coinex.com/v1/market/future/ticker?symbol={symbol}"
+    response = requests.get(url)
+    data = response.json()
+    return data["data"]["last"]
 
-    points_per_turn = total_points / num_turns
-
-    for curr_point_num in range(total_points):
-        curr_turn, i = divmod(curr_point_num, points_per_turn)
-        angle = (curr_turn + 1) * 2 * math.pi * i / points_per_turn
-        radius = curr_point_num / total_points
-        x = radius * math.cos(angle)
-        y = radius * math.sin(angle)
-        data.append(Point(x, y))
-
-    st.altair_chart(alt.Chart(pd.DataFrame(data), height=500, width=500)
-        .mark_circle(color='#0068c9', opacity=0.5)
-        .encode(x='x:Q', y='y:Q'))
+# Use Streamlit to create a simple app to display the price
+st.title("CoinEx Token Future Price")
+symbol = st.text_input("Enter the symbol for the token future")
+price = get_price(symbol)
+st.write("The latest price of the token future is:", price, "USD")
