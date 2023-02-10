@@ -15,24 +15,19 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
-def get_price(symbol):
-    url = f"https://api.coinex.com/v1/market/future/ticker?symbol={symbol}"
-    response = requests.get(url)
-    data = response.json()
-    return data["last"]
-
 import requests
 import streamlit as st
 
-# Make a request to the CoinEx API to get the latest price of a token future
+# Make a request to the OKEx API to get the latest price of a token future
 def get_price(symbol):
-    url = f"https://api.coinex.com/v1/market/future/ticker?symbol={symbol}"
+    url = f"https://www.okex.com/api/spot/v3/instruments/{symbol}/ticker"
     response = requests.get(url)
     data = response.json()
     return data["last"]
 
 # Use Streamlit to create a simple app to display the price
-st.title("CoinEx Token Future Price")
+st.title("OKEx Token Future Price")
 symbol = st.text_input("Enter the symbol for the token future")
 price = get_price(symbol)
 st.write("The latest price of the token future is:", price, "USD")
+
