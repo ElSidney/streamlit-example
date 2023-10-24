@@ -14,4 +14,4 @@ def get_price(symbol):
     return data
 
 
-
+st.write(data)
