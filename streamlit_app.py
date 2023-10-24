@@ -6,13 +6,5 @@ import streamlit as st
 import requests
 
 
-# Make a request to the OKEx API to get the latest price of a token future
-def get_price():
-    url = f"GET /api/v5/public/funding-rate?instId=BTC-USD-SWAP"
-    response = requests.get(url)
-    data = response.json()
-    return data
+streamlit.write("hello")
 
-get_price()
-
-st.write(data)
