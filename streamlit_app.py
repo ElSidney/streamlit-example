@@ -11,7 +11,7 @@ def get_price(symbol):
     url = f"https://www.okex.com/api/v5/instruments?instType=SPOT&instId=ETH-USD"
     response = requests.get(url)
     data = response.json()
-    return data[]
+    return data
 
 # Use Streamlit to create a simple app to display the price
 st.title("OKEx Token Future Price")
