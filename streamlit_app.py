@@ -7,12 +7,12 @@ import requests
 
 
 # Make a request to the OKEx API to get the latest price of a token future
-def get_price(symbol):
-    url = f"GET /api/v5/public/funding-rate?instId={symbol}"
+def get_price():
+    url = f"GET /api/v5/public/funding-rate?instId=BTC-USD-SWAP"
     response = requests.get(url)
     data = response.json()
     return data
 
-get_price(BTC-USD-SWAP)
+get_price()
 
 st.write(data)
