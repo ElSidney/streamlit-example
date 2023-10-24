@@ -6,5 +6,5 @@ import streamlit as st
 import requests
 
 
-streamlit.write("hello")
+st.write("hello")
 
